@@ -1,1 +1,11 @@
+//criar projeto
 npx create-react-app web --template typescript
+
+//navegação
+yarn add react-router-dom
+
+yarn add @types/react-router-dom -D
+
+//Conceito SPA - Não carregar a tela por completo
+import { Link } from 'react-router-dom'
+-- verificar na aba de network 
