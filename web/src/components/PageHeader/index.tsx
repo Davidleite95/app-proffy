@@ -1,0 +1,34 @@
+import React from 'react'
+import { Link } from 'react-router-dom';
+
+import logoImg from '../../assets/images/logo.svg';
+import backIcon from '../../assets/images/icons/back.svg';
+
+import './style.css';
+
+//Para colocar propriedades no title onde utiliza o componente, é necessário ser seja
+//uma contante e utilizando: interface definir o formato de uma tipagem de um objeto
+
+interface PageHeaderProps {
+    title: string;
+}
+
+//COMPONENTE: PageHeader, ele é um Function Component e as propriedades não essa do parâmetro
+const PageHeader: React.FC<PageHeaderProps> = (props) => {
+    return (
+        <header className="page-header">
+            <div className="top-bar-container">
+                <Link to="/" >
+                    <img src={backIcon} alt="Voltar" />
+                </Link>
+                <img src={logoImg} alt="Proffy" />
+            </div>
+            <div className="header-content">
+                <strong>{props.title}</strong>
+                {props.children}
+            </div>            
+        </header>
+    )
+}
+
+export default PageHeader;
