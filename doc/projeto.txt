@@ -1,11 +1,36 @@
-//criar projeto
+//criar projeto reactJs:
 npx create-react-app web --template typescript
 
-//navegação
+//navegação:
 yarn add react-router-dom
 
 yarn add @types/react-router-dom -D
 
 //Conceito SPA - Não carregar a tela por completo
 import { Link } from 'react-router-dom'
--- verificar na aba de network 
+-- verificar na aba de network p
+
+
+//criar projeto node.js:
+yarn init -y - criar o package.json (dependecias da aplicação)
+yarn add typescript -D ou npm install
+
+- criar arquivo de configurações do typescript:
+yarn tsc --init
+yarn add ts-node-dev -D - PARA NÃO FICAR PARANDO E STARTANDO O NODE.JS
+--converte typescript para javascript: --transpile-only
+--ignorar o node modules: --ignore-wacth node_modelus 
+não precisar start sempre : --respawn
+
+DEPENCIAS NODE:
+Framework: yarn add express;
+Erro da 'sintaxe por conta do type script': yarn add @types/express -D;
+
+INSTALAÇÃO DE BANCO DE DADOS RELACIONAL:
+knex, é para inscrever javascript ao inves de select * from user / knex(user).select(*);
+yarn add knex sqlite3;
+yarn add knex;
+
+
+ 
+
