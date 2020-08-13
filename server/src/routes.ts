@@ -1,15 +1,10 @@
 import express from 'express';
-import db from './database/connection';
-import convertHourToMinutes from './utils/convertHourToMinutes';
+import ClassesController from './controllers/ClassesController';
+import ConnectionsController from './controllers/ConnectionController';
 
 const routes = express.Router();
-
-//definir formato de um objeto
-interface ScheduleItem {
-    week_day: number;
-    from: string;
-    to: string;
-}
+const classesControllers = new ClassesController();
+const connectionControllers = new ConnectionsController();
 
 //ouvir requisição http: listen - ed: localhost:3333/users;
 //request: informações da requisição;
@@ -27,46 +22,12 @@ routes.get('/', (request, response) => {
 });
 
 //Começar os metodos da aplicação
-routes.post('/classes', async (request, response) => {
-    const {
-        name,
-        avatar,
-        whatsapp,
-        bio,
-        subject,
-        cost,
-        schedule
-    } = request.body;
+routes.post('/classes', classesControllers.create);
+routes.get('/classes', classesControllers.index);
+routes.post('/connections', connectionControllers.create);
+routes.get('/connections', connectionControllers.index);
 
-    const insertedUsersIds = await db('users').insert({
-        name,
-        avatar,
-        whatsapp,
-        bio,
-    });
 
-    const user_id = insertedUsersIds[0];
 
-    const insertedClassesIds = await db('classes').insert({
-        subject,
-        cost,
-        user_id,
-    })
-
-    const class_id = insertedClassesIds[0];
-
-    const classShedule = schedule.map((sheduleItem: ScheduleItem) => {
-        return {
-            class_id,
-            week_day: sheduleItem.week_day,
-            from: convertHourToMinutes(sheduleItem.from),
-            to: convertHourToMinutes(sheduleItem.to),
-        };
-    })
-
-    await db('class_schedule').insert(classShedule);
-
-    return response.send();
-});
 
 export default routes;

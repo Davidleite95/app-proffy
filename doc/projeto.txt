@@ -31,6 +31,9 @@ knex, é para inscrever javascript ao inves de select * from user / knex(user).s
 yarn add knex sqlite3;
 yarn add knex;
 
+ESSE CORS PERMITE QUE OUTRAS APLICAÇÕES(PERMITA) ENDEREÇOS DIFERNTE ACESSO A API
+yarn add cors
+
 
  
 
