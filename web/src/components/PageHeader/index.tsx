@@ -11,6 +11,7 @@ import './style.css';
 
 interface PageHeaderProps {
     title: string;
+    description?: string
 }
 
 //COMPONENTE: PageHeader, ele é um Function Component e as propriedades não essa do parâmetro
@@ -25,6 +26,7 @@ const PageHeader: React.FC<PageHeaderProps> = (props) => {
             </div>
             <div className="header-content">
                 <strong>{props.title}</strong>
+                {props.description && <p>{props.description}</p>}
                 {props.children}
             </div>            
         </header>
