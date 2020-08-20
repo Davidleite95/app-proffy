@@ -1,14 +1,18 @@
 import React, { useState, FormEvent } from 'react';
 import PageHeader from '../../components/PageHeader';
+//redireciona dps de uma ação
+import { useHistory } from 'react-router-dom';
 
 import './style.css';
 import Input from '../../components/Input';
 import warningIcon from '../../assets/images/icons/warning.svg';
 import Textarea from '../../components/Textarea';
 import Select from '../../components/Select';
+import api from '../../services/api';
 
 //Componente não aceite a propriedade description, com isso tem que criar a interface
 function TeacherForms() {
+    const history = useHistory();
     //INSERT
     const [name, setName] = useState('');
     const [avatar, setAvatar] = useState('');
@@ -17,10 +21,6 @@ function TeacherForms() {
 
     const [subject, setSubject] = useState('');
     const [cost, setConst] = useState('');
-
-
-
-
 
     //ESTADO -- SUSBTITUI O IR NO HTML INNER HTML OU APPENDE NO JS TRADICIONAL
     //NO REACT É SÓ ACRESCENTAR DE UM ITEM A MAIS NO ARRAY POR ISSO TEM QUE FAZER O ESTADO, PRA ISSO TEM QUE IMPORTA useState
@@ -40,15 +40,51 @@ function TeacherForms() {
         ]);
     }
 
-    function setSheduleItemValue(index: number, fiel: string, value: string) {
-        
+    // PEGAR AS INFORMAÇÕES DO ARRAY: INDEX: WEEK_DAY...
+    // MAP VAI PERCORRER TODO O OBJETO, SENDO O INDEX: 0 , VAI ENTRAR NO IF, VAI RETORNAR TUDO DO ARRAY,
+    // E ESTÁ COLOCANDO O [FIELD] VAI SOBRESCREVER O VALOR QUE JÁ EXISTE
+    function setSheduleItemValue(position: number, field: string, value: string) {
+        const updateSheduleItem = sheculeItems.map((scheduleItem, index) => {
+            if(index === position){
+                return {...scheduleItem, [field]: value};
+            }
+            return scheduleItem;
+        });
+        //console.log(newArray);
+
+        setSheduleItems(updateSheduleItem);
     }
 
     //CADASTRA
     function handleCreateClasses(e: FormEvent) {
         //não dar reload na tela
         e.preventDefault();
-        console.log()
+
+        api.post('classes', {
+            name, 
+            avatar,
+            whatsapp,
+            bio, 
+            subject,
+            cost: Number(cost),
+            schedule: sheculeItems
+        }).then(() => {
+            alert('Cadastro feito com sucesso!')
+
+            history.push('/');
+        }).catch(() => {
+            alert('Erro no cadastro!')
+        })
+
+        console.log({
+            name, 
+            avatar,
+            whatsapp,
+            bio, 
+            subject,
+            cost,
+            sheculeItems
+        });
     }
 
     return (
@@ -104,6 +140,7 @@ function TeacherForms() {
                                     <Select
                                         name="week_day"
                                         label="Dia da semana"
+                                        value={scheduleItem.week_day}
                                         onChange={e => setSheduleItemValue(index,'week_day', e.target.value)} 
                                         options={[
                                             { value: '0', label: 'Domingo' },
@@ -115,8 +152,8 @@ function TeacherForms() {
                                             { value: '6', label: 'Sábado' },
                                         ]} />
 
-                                    <Input name="from" label="Dias" type="time" />
-                                    <Input name="to" label="Até" type="time" />
+                                    <Input name="from" label="Dias" value={scheduleItem.from} type="time" onChange={e => setSheduleItemValue(index,'from', e.target.value)}  />
+                                    <Input name="to" label="Até" value={scheduleItem.to} type="time" onChange={e => setSheduleItemValue(index,'to', e.target.value)}  />
                                 </div>
                             )
                         })}
