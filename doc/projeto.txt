@@ -34,6 +34,16 @@ yarn add knex;
 ESSE CORS PERMITE QUE OUTRAS APLICAÇÕES(PERMITA) ENDEREÇOS DIFERNTE ACESSO A API
 yarn add cors
 
+--<SELECT>Selecione uma opção</select> | biblioteca do React perfeita para esse fim:
+https://react-select.com/
+
+-- PRIMEIRO PASSAS PARA CONSUMIR OS SERVIÇOS DE UMA API:
+INSTALAR: yarn add axios
+// criar a pasta services para começar a organizar
+// sempre que for uma informação que é mantida por nós tem que ter um estado
+// useState para estado
+// useEffect: uma função que tem dois parâmetros - a primeiro é uma função a segunda é o array de dependentes
+
 
  
 
