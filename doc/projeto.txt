@@ -33,6 +33,7 @@ yarn add knex;
 
 ESSE CORS PERMITE QUE OUTRAS APLICAÇÕES(PERMITA) ENDEREÇOS DIFERNTE ACESSO A API
 yarn add cors
+npm install @types/cors
 
 --<SELECT>Selecione uma opção</select> | biblioteca do React perfeita para esse fim:
 https://react-select.com/
@@ -43,6 +44,40 @@ INSTALAR: yarn add axios
 // sempre que for uma informação que é mantida por nós tem que ter um estado
 // useState para estado
 // useEffect: uma função que tem dois parâmetros - a primeiro é uma função a segunda é o array de dependentes
+
+////////
+CRIAÇÃO O APP MOBILE - REACT NATIVE:
+expo init mobile
+-- escolher template blank (TypeScript) (intalaçaõ de idependencias, yarn entre outros);
+
+PRIMEIRAMENTE:
+Aproveitamento 90% da maioria das coisas que é utilizando no ReactJs;
+União dois é muito poderosa - base de conhecimento muito enxuta;
+
+Semelhaças:
+Mesma escrita dos componentes, que são funções que retorna os códigos jsx na web,
+a diferença no mobile é que não é utilizando que se utiliza na versão mobile ( com relação as informações)
+do HTML;
+
+É Utilizado componentes pré-criado pelo pacote de ReactJs (são bloco - utiliza view);
+Devido não ter elementos com significados semântico essas coisas, é diferente), com isso tudo é View e tudo 
+que é view é um text;
+
+Não tem classes, id, essas coisas utiliza: StyleSheet, como se fosse um objeto com estilizações;
+No react-native não tem arquivos de rotas, é necessário importar no arquivo principal App. que seria o único;
+TypeScript não entendi os arquivos de imagem dentro do arquivo javasctipt, é necessário criar uma pasta @types e lá coloca as declarações para as imagens;
+Para as fontes: bibiliotec expo google fontes; add: expo install expo-font @expo-google-fonts/archivo @expo-google-fonts/poppins
+ 	 importa do app {AppLoading} componente de carregamento - (splash spreen) (enquanto mostra o splah até carregar a fonte);
+--NAVEGAÇÃO: https://reactnavigation.org/docs/hello-react-navigation react navigation -> yarn add @react-navigation/native 
+	     expo install react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context @react-native-community/masked-view
+	     yarn add @react-navigation/stack
+             yarn add @react-navigation/bottom-tabs
+		DEPOIS: Criar a pasta chamada de routes
+
+
+
+
+
 
 
  

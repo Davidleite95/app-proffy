@@ -58,7 +58,7 @@ function TeacherList() {
                             { value: 'Matemática', label: 'Matemática' },
                             { value: 'Português', label: 'Português' },
                             { value: 'Programação', label: 'Programação' },
-
+                            { value: 'Fisiologia Humana', label: 'Fisiologia Humana' },
                         ]} />
                     <Select
                         name="week_day"
