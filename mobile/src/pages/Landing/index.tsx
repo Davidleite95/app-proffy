@@ -1,5 +1,9 @@
 import React from 'react';
 import { View, Image, Text, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+
+//Habilita o botão do sistema operacional que usuário está utilizando
+import { RectButton } from 'react-native-gesture-handler';
 
 import styles from './style';
 
@@ -9,6 +13,21 @@ import giveClassesIcon from '../../assets/images/icons/giveClasses.png';
 import heartIcon from '../../assets/images/icons/heart.png';
 
 function Landing() {
+    //const navigation = useNavigation();
+    const { navigate } = useNavigation();
+
+
+    function handleNavigationToGiveClassesPage(){
+        //navigation.navigate();
+
+        //name da rota
+        navigate('GiveClasses');
+    }
+
+    function handleNavigationToStudyPages(){
+        navigate('Study');
+    }
+
     return (
         <View style={styles.container} >
             <Image source={langinImg} style={styles.banner} />
@@ -19,19 +38,24 @@ function Landing() {
             </Text>
 
             <View style={styles.buttonsContainer}>
-                {/** Botão Estudante*/}
-                <TouchableOpacity style={[styles.button, styles.buttonPrimary]}>
+                {/** Botão Estudante
+                {/**TouchableOpacity = RectButton*/}
+
+                <RectButton onPress={handleNavigationToStudyPages} style={[styles.button, styles.buttonPrimary]}>
                     <Image source={studyIcon} />
 
                     <Text style={styles.buttonText}>Estudar</Text>
-                </TouchableOpacity>
+                </RectButton>
 
                 {/** Botão Professor*/}
-                <TouchableOpacity style={[styles.button, styles.buttonSecondary]}>
+                <RectButton 
+                    onPress={handleNavigationToGiveClassesPage} 
+                    style={[styles.button, styles.buttonSecondary]}
+                >
                     <Image source={giveClassesIcon} />
 
                     <Text style={styles.buttonText}>Dar Aula</Text>
-                </TouchableOpacity>
+                </RectButton>
             </View>
 
             <Text style={styles.totalConnections}>
