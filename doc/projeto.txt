@@ -74,6 +74,9 @@ Para as fontes: bibiliotec expo google fontes; add: expo install expo-font @expo
              yarn add @react-navigation/bottom-tabs
 		DEPOIS: Criar a pasta chamada de routes
 
+#Lista Professores:
+
+
 
 
 

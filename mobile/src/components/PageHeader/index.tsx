@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { View, Image, Text } from 'react-native';
 import { BorderlessButton } from 'react-native-gesture-handler';
 
@@ -8,11 +8,13 @@ import logoImg from '../../assets/images/logo.png';
 import styles from './styles'
 import { useNavigation } from '@react-navigation/native';
 
+//ReactNode - PODE RECEBER COMPONENTE EM UMA PRORIEDADE.
 interface PagerHeaderPropos {
     title: string;
+    ReaderRigtht?: ReactNode;
 }
 
-const PageHeader: React.FC<PagerHeaderPropos> = ({ title }) => {
+const PageHeader: React.FC<PagerHeaderPropos> = ({ title, children }) => {
     const { navigate } = useNavigation();
 
     function handleGoBack() {
@@ -29,6 +31,8 @@ const PageHeader: React.FC<PagerHeaderPropos> = ({ title }) => {
             </View>
 
             <Text style={styles.title}>{title}</Text>
+
+            {children}
         </View>
     )
 }

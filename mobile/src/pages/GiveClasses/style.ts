@@ -3,8 +3,8 @@ import { StyleSheet } from 'react-native'
 const styles = StyleSheet.create({
     container: {
         flex: 1, //pegar toda a tela
+        //backgroundColor: '#000000',
         backgroundColor: '#8257E5',
-        //dev-backgroundColor: '#8257E5',
         justifyContent: 'center',
         padding: 40
     },
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
 
     okButton: {
         marginVertical: 40,
-        backgroundColor: '#04d361',
+        backgroundColor: '#00bdf7',
         height: 58,
         alignItems: 'center',
         justifyContent: 'center',

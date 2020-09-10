@@ -25,7 +25,7 @@ function GiveClasses() {
                 source={giveClassesBgImage}
                 style={styles.content}
             >
-                <Text style={styles.title}>Quer ser um Proffy?</Text>
+                <Text style={styles.title}>Quer ser um Profesor do Dev?</Text>
                 <Text style={styles.description}>
                     Para começar, você precisa ser se cadastrar como professor na plataforma web.
             </Text>

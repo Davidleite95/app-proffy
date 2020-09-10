@@ -16,7 +16,6 @@ function AppStack() {
                 <Screen name="Landing" component={Landing} />
                 <Screen name="GiveClasses" component={GiveClasses} />
                 <Screen name="Study" component={StudyTabs} />
-
             </Navigator>
         </NavigationContainer>
     );

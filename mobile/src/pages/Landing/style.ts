@@ -4,7 +4,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1, //pegar toda a tela
         backgroundColor: '#8257E5',
-        //dev-backgroundColor: '#8257E5',
+        //backgroundColor: '#000000',
         justifyContent: 'center',
         padding: 40
     },
@@ -43,12 +43,12 @@ const styles = StyleSheet.create({
 
     buttonPrimary: {
         backgroundColor: '#9871f5'
-        //dev-backgroundColor: '#00bdf7'
+        //backgroundColor: '#00bdf7'
     },
 
     buttonSecondary: {
         backgroundColor: '#04d361'
-        //dev-backgroundColor: '#007bff'
+        //backgroundColor: '#007bff'
     },
 
     buttonText: {
