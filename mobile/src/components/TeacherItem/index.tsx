@@ -12,11 +12,11 @@ function TeacherItem() {
     return (
         <View style={styles.container}>
             <View style={styles.profile}>
-                <Image style={styles.avatar} source={{ uri: 'https://github.com/diego3g.png' }} />
+                <Image style={styles.avatar} source={{ uri: 'https://github.com/davidleite95.png' }} />
 
                 <View style={styles.profileInfo}>
-                    <Text style={styles.name}>Diego Fernandes</Text>
-                    <Text style={styles.subject}>Química</Text>
+                    <Text style={styles.name}>David Leite</Text>
+                    <Text style={styles.subject}>Programador</Text>
                 </View>
             </View>
 

@@ -11,10 +11,10 @@ import { useNavigation } from '@react-navigation/native';
 //ReactNode - PODE RECEBER COMPONENTE EM UMA PRORIEDADE.
 interface PagerHeaderPropos {
     title: string;
-    ReaderRigtht?: ReactNode;
+    readerRigtht?: ReactNode;
 }
 
-const PageHeader: React.FC<PagerHeaderPropos> = ({ title, children }) => {
+const PageHeader: React.FC<PagerHeaderPropos> = ({ title, children, readerRigtht }) => {
     const { navigate } = useNavigation();
 
     function handleGoBack() {
@@ -30,8 +30,10 @@ const PageHeader: React.FC<PagerHeaderPropos> = ({ title, children }) => {
                 <Image source={logoImg} resizeMode="contain" />
             </View>
 
-            <Text style={styles.title}>{title}</Text>
-
+            <View style={styles.header}>
+                <Text style={styles.title}>{title}</Text>
+                {readerRigtht}
+            </View>
             {children}
         </View>
     )
