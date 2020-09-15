@@ -75,7 +75,12 @@ Para as fontes: bibiliotec expo google fontes; add: expo install expo-font @expo
 		DEPOIS: Criar a pasta chamada de routes
 
 #Lista Professores:
-
+	#conectar: yarn add axios;
+	Pastas:
+		Criar pasta services -> api.ts
+		import axios from 'axios'
+	OBS: O endereço para que possa funcionar é o que mostra no expo web sem portar e sem prefixo.
+               
 
 
 
