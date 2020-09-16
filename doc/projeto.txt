@@ -80,6 +80,12 @@ Para as fontes: bibiliotec expo google fontes; add: expo install expo-font @expo
 		Criar pasta services -> api.ts
 		import axios from 'axios'
 	OBS: O endereço para que possa funcionar é o que mostra no expo web sem portar e sem prefixo.
+
+#Gravar favoritos no storage do celular:
+	install> expo install @react-native-community/async-storage
+	import AsyncStorage from  '@react-native-community/async-storage';
+
+	
                
 
 

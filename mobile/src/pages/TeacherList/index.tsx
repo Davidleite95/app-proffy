@@ -1,29 +1,44 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { View, Text } from 'react-native'
 import { Feather } from '@expo/vector-icons'
+import AsyncStorage from '@react-native-community/async-storage';
 
 import PageHeader from '../../components/PageHeader';
 
 import api from '../../services/api';
 
 import styles from './styles';
-import TeacherItem from '../../components/TeacherItem';
+import TeacherItem, { Teacher } from '../../components/TeacherItem';
 import { ScrollView, TextInput, BorderlessButton, RectButton } from 'react-native-gesture-handler';
-
 
 function TeacherList() {
     const [isfilterVisible, setIsFilterVisible] = useState(false);
+    const [favorites, setFavorites] = useState<number[]>([]);
     const [teachers, setTeachers] = useState([]);
 
     const [subject, setSuject] = useState('');
     const [week_day, setWeekDay] = useState('');
     const [time, setTime] = useState('');
 
+    /**Indo do banco local em busca de uma chave chamada favorites => dados em textos sempre*/
+    useEffect(() => {
+        AsyncStorage.getItem('favorites').then(response => {
+            if (response) {
+                const favoritedTeachears = JSON.parse(response);
+                const favoritedTeachersIds = favoritedTeachears.map((teacher: Teacher) => {
+                    return teacher.id;
+                })
+
+                setFavorites(favoritedTeachersIds);
+            }
+        });
+    }, []);
+
     function handleToglleFilterVisible() {
         setIsFilterVisible(!isfilterVisible);
     }
 
-    async function handleFilterSubmit(){
+    async function handleFilterSubmit() {
         const response = await api.get('classes', {
             params: {
                 subject,
@@ -31,16 +46,9 @@ function TeacherList() {
                 time,
             }
         })
-        //colocando no estado
-        
-        console.log(response.data);
+        /*Fechar o filtrar quando for pesquisar */
+        setIsFilterVisible(false);
         setTeachers(response.data);
-/*
-        console.log({
-            subject,
-            week_day,
-            time,
-        })*/
     }
     return (
         <View style={styles.container}>
@@ -93,11 +101,15 @@ function TeacherList() {
 
             <ScrollView style={styles.teacherList}
                 contentContainerStyle={{ paddingHorizontal: 16, paddingBottom: 24 }}>
-                <TeacherItem />
-                <TeacherItem />
-                <TeacherItem />
-                <TeacherItem />
-                <TeacherItem />
+
+                {teachers.map((teacher: Teacher) => {
+                    return (<TeacherItem
+                        key={teacher.id}
+                        teacher={teacher}
+                        favorited={favorites.includes(teacher.id)}
+                    />)
+                })}
+
             </ScrollView>
         </View>
     )
