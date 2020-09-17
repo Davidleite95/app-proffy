@@ -8,6 +8,7 @@ import unFavoriteIcon from '../../assets/images//icons/unFavoriteIcon.png';
 import whatszaapIcon from '../../assets/images/Whatsapp.png';
 
 import styles from './style';
+import api from '../../services/api';
 
 export interface Teacher {
     id: number;
@@ -28,31 +29,44 @@ const TeacherItem: React.FC<TeacherItemProps> = ({ teacher, favorited }) => {
     /** SEMPRE QUE UMA INFORMAÇÃO FOR MUDAR ELA TEM QUE ESTÁ NO ESTADO DA APLICAÇÃO */
     const [isFavorite, setIsFavirited] = useState(favorited);
 
+    /**SALVAR UMA CONEXÃO AO ENTRAR EM CONTATO */
     function handleLinkToWhatsapp() {
+        api.post('connections', {
+            user_id: teacher.id,
+        })
+
         /** DP LINK - UMA APLICAÇÃO ABRI A OUTRA, modulo: Linking */
         Linking.openURL(`whatsapp://send?phone=${teacher.whatsapp}`)
     }
 
     /**se tiver faviritado */
     async function handleToggleFavorite() {
+
+        const favorites = await AsyncStorage.getItem('favorites');
+        let favoritesArray = [];
+
+        if (favorites) {
+            favoritesArray = JSON.parse(favorites);
+        }
+
         if (isFavorite) {
             //remover dos favoritos
+            const favoritesItens = favoritesArray.findIndex((teacherItem: Teacher) => {
+                return teacherItem.id === teacher.id;
+            });
+
+            //splice remover um item do array e passar a possição 1 que é só um item
+            favoritesArray.splice(favoritesItens, 1);
+            setIsFavirited(false);
 
         } else {
             //adicionar aos favoritos
-            const favorites = await AsyncStorage.getItem('favorites');
-
-            let favoritesArray = [];
-
-            if (favorites) {
-                favoritesArray = JSON.parse(favorites);
-            }
-
             favoritesArray.push(teacher);
 
             setIsFavirited(true);
-            await AsyncStorage.setItem('favorites', JSON.stringify(favoritesArray))
         }
+
+        await AsyncStorage.setItem('favorites', JSON.stringify(favoritesArray));
     }
 
     return (
@@ -77,11 +91,11 @@ const TeacherItem: React.FC<TeacherItemProps> = ({ teacher, favorited }) => {
                 </Text>
 
                 <View style={styles.buttonsContainer}>
-                    <RectButton 
-                    onPress={handleToggleFavorite}
-                    style={[
-                        styles.favoriteButton, 
-                        isFavorite ? styles.favorited : {},
+                    <RectButton
+                        onPress={handleToggleFavorite}
+                        style={[
+                            styles.favoriteButton,
+                            isFavorite ? styles.favorited : {},
                         ]}>
                         {isFavorite
                             ? <Image source={unFavoriteIcon}></Image>

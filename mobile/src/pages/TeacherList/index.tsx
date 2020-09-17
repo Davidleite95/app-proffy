@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { View, Text } from 'react-native'
 import { Feather } from '@expo/vector-icons'
 import AsyncStorage from '@react-native-community/async-storage';
@@ -10,6 +10,7 @@ import api from '../../services/api';
 import styles from './styles';
 import TeacherItem, { Teacher } from '../../components/TeacherItem';
 import { ScrollView, TextInput, BorderlessButton, RectButton } from 'react-native-gesture-handler';
+import { useFocusEffect } from '@react-navigation/native';
 
 function TeacherList() {
     const [isfilterVisible, setIsFilterVisible] = useState(false);
@@ -21,7 +22,8 @@ function TeacherList() {
     const [time, setTime] = useState('');
 
     /**Indo do banco local em busca de uma chave chamada favorites => dados em textos sempre*/
-    useEffect(() => {
+
+    function loadFavorites() {
         AsyncStorage.getItem('favorites').then(response => {
             if (response) {
                 const favoritedTeachears = JSON.parse(response);
@@ -32,22 +34,30 @@ function TeacherList() {
                 setFavorites(favoritedTeachersIds);
             }
         });
-    }, []);
+    }
+
+    useFocusEffect(() => {
+        loadFavorites();
+    })
 
     function handleToglleFilterVisible() {
         setIsFilterVisible(!isfilterVisible);
     }
 
     async function handleFilterSubmit() {
+        loadFavorites();
         const response = await api.get('classes', {
             params: {
-                subject,
                 week_day,
+                subject,
                 time,
             }
         })
         /*Fechar o filtrar quando for pesquisar */
         setIsFilterVisible(false);
+
+        console.log(response.data);
+
         setTeachers(response.data);
     }
     return (
